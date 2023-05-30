@@ -1,5 +1,8 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { Container, SSRProvider } from "@/components/boostrap";
+import NavBar from "./NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <h1>nav bar</h1>
-        {children}
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <SSRProvider>
+          <NavBar />
+          <main>
+            <Container className=" py-4">{children}</Container>
+          </main>
+        </SSRProvider>
       </body>
     </html>
   );
